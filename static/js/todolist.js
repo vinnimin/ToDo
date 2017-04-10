@@ -13,14 +13,14 @@ function addTask(){
 
 
     var checkButton = document.createElement("button");
-    var checkButtonTxt = document.createTextNode("V");
+    var checkButtonTxt = document.createTextNode("Check");
     checkButton.className = "btn buttons checkTask";
     checkButton.appendChild(checkButtonTxt);
     li.appendChild(checkButton);
 
 
     var closeButton = document.createElement("button");
-    var closeButtonTxt = document.createTextNode("X");
+    var closeButtonTxt = document.createTextNode("Finish");
     closeButton.className = "btn btn-danger buttons closeTask";
     closeButton.appendChild(closeButtonTxt);
     li.appendChild(closeButton);
