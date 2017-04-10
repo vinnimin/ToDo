@@ -8,17 +8,17 @@
 {% endblock %}
 
 {% block content %}
-    <div class="">
+    <form class="" action="" method="get">
         <h1>Tasks To Do!</h1>
         <div style="display: flex">
             <input id="taskInput" class="form-control" type="text">
-            <button id="btn-AddTask" class="btn btn-primary" onclick="addTask()">Add Task</button>
+            <button id="btn-AddTask" name="inputTask" class="btn btn-primary" onclick="addTask()">Add Task</button>
         </div>
         <div class="tasks">
             <ul id="ul-taskList">
             </ul>
         </div>
-    </div>
+    </form>
 {% endblock %}
 
 {% block scripts %}

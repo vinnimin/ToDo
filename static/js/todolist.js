@@ -15,6 +15,7 @@ function addTask(){
     var checkButton = document.createElement("button");
     var checkButtonTxt = document.createTextNode("Check");
     checkButton.className = "btn buttons checkTask";
+    checkButton.name = "status";
     checkButton.appendChild(checkButtonTxt);
     li.appendChild(checkButton);
 
