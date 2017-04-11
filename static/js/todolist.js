@@ -1,36 +1,97 @@
+$(document).ready(function() {
+
+	$('#btn-addTask').click(function(event) {
+		$.ajax({
+			data : {
+				taskName : $('#taskInput').val(),
+                taskStatus : 'false'
+			},
+			type : 'POST',
+			url : '/addTask'
+		})
+		.done(function(data) {
+			if (data.error) {
+                errorPlace();
+			}
+			else {
+                addTask();
+			}
+		});
+		event.preventDefault();
+	});
+});
+
+function errorPlace(){
+    $("#taskInput").attr("placeholder", "Hey! You can't do nothing!");    
+}
+
 function addTask(){
     var task = document.getElementById("taskInput").value;
+    
+    //
+    var li = document.createElement("li");
+    li.className = "li-task";
+    document.getElementById("ul-taskList").appendChild(li);
 
-    if(task != ""){
-        var li = document.createElement("li");
-        var textLi = document.createTextNode(task);
-        li.appendChild(textLi);
-        document.getElementById("ul-taskList").appendChild(li);
-    }else{
-        $("#taskInput").attr("placeholder","Hey! You can't do nothing!");
-    }
-    document.getElementById("taskInput").value = "";
+    //
+    var divTask = document.createElement("div");
+    divTask.className = "divTaskText";
+    li.appendChild(divTask);
 
+    //
+    var taskIcon = document.createElement("span");
+    taskIcon.className = "glyphicon glyphicon-pushpin task-icon";
+    divTask.appendChild(taskIcon);
 
+    //
+    var textLi = document.createTextNode(task);
+    divTask.appendChild(textLi);
+
+    //Container Buttons
+    var div = document.createElement("div");
+    div.className = "btn-group btn-task";
+    div.setAttribute("role", "group");
+    div.setAttribute("style", "float: right");
+    li.appendChild(div);
+
+    //Check Task Button
     var checkButton = document.createElement("button");
-    var checkButtonTxt = document.createTextNode("Check");
-    checkButton.className = "btn buttons checkTask";
-    checkButton.name = "status";
+    var checkIcon = document.createElement("span");
+    checkIcon.className = "glyphicon glyphicon-check";
+    checkButton.appendChild(checkIcon);
+    var checkButtonTxt = document.createTextNode("  Check");
+    checkButton.className = "btn checkTask";
+    checkButton.setAttribute("type", "button");
     checkButton.appendChild(checkButtonTxt);
-    li.appendChild(checkButton);
+    div.appendChild(checkButton);
 
-
+    //Close Task Button
     var closeButton = document.createElement("button");
     var closeButtonTxt = document.createTextNode("Finish");
-    closeButton.className = "btn btn-danger buttons closeTask";
+    closeButton.className = "btn btn-danger closeTask";
+    closeButton.setAttribute("type", "button");
     closeButton.appendChild(closeButtonTxt);
-    li.appendChild(closeButton);
+    div.appendChild(closeButton);
 
 
+   /* closeTask = document.getElementsByClassName("closeTask");
+    for (i = 0; i < closeTask.length; i++) {
+        closeTask[i].onclick = function() {
+            
+        }
+    }*/
     $(".closeTask").click(function(){
+        $.ajax({
+            data : {
+                taskName : task
+            },
+            type : 'POST',
+            url : '/deleteTask'
+        });
+        event.preventDefault();
+
         $(this).parent().remove();
     });
-
 
     checkTask = document.getElementsByClassName("checkTask");
     for (i = 0; i < checkTask.length; i++) {
@@ -43,7 +104,9 @@ function addTask(){
                 $(this).addClass('btn-success');
             }
         }
-    } 
+    }
+    
+    document.getElementById("taskInput").value = "";
 }
 
 

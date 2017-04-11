@@ -12,25 +12,25 @@ ul{
 .tasks li{
     width: 100%;
     height: 34px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.divTaskText {
+    padding-left: 8px;
+    padding-top: 7px;
 }
 
 li:hover{
     background-color: #EEE;
 }
 
-.buttons{
-    position: absolute;
-    width: 100px;
-}
-
-.checkTask{
-    right: 100px;
+.task-icon {
+    margin-right: 15px;
 }
 
 .taskDone{
     background-color: rgba(173,255,47,0.6);
-}
-
-.closeTask{
-    right: 0px;
 }
