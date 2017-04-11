@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	$('#btn-addTask').click(function(event) {
 		$.ajax({
 			data : {
@@ -89,8 +88,7 @@ function addTask(){
             url : '/deleteTask'
         });
         event.preventDefault();
-
-        $(this).parent().remove();
+        $(this).parent().parent().remove();
     });
 
     checkTask = document.getElementsByClassName("checkTask");
